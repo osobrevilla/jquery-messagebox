@@ -1,0 +1,38 @@
+﻿/* CSS jQuery YellowBox plugin 
+ * Copyright 2010 Oscar Sobrevilla (oscar.sobrevilla@gmail.com)
+ * Released under the MIT and GPL licenses.
+ * version 1.5 Beta
+ * Require: jquery.color.js By (John Resig)
+*/
+
+
+div.ybox { background:#FFFBE2; border:1px solid #FFE222; margin:0 0 10px; padding:10px; -moz-border-radius:2px; -webkit-border-radius:2px; border-radius:2px;}
+div.ybox p , div.ybox .parraf  { margin:0; font-size:11px;}
+div.ybox .close { cursor:pointer; background:url(../img/close.gif) 0 0; width:18px; height:18px; display:inline-block; float:right;}
+div.ybox p { color:#000;}
+div.ybox .close:hover { background-position:right 0;}
+div.ybox .ybox_btnbar { padding:1em 0 0;}
+div.ybox .ybox_btnbar .uibutton { font-size:5px;}
+
+div.ybox { -moz-transition: background 0.8s ease; -webkit-transition: background 0.8s ease; }
+div.ybox.emphasis { background: #FFE555 ;}
+
+.ybox_btn + .ybox_btn { margin-left:0.5em;}  
+.uibutton { color:#FFF; padding:.45em .40em; display:inline-block;  border-width:1px; border-style:solid; border-color:#DF7E0D; background-image:url(../img/btns.jpg); background-position:left -48px; cursor:pointer; -moz-box-shadow:0 1px 0 rgba(0, 0, 0, 0.1); -webkit-box-shadow:0 1px 0 rgba(0, 0, 0, 0.1); box-shadow:0 1px 0 rgba(0, 0, 0, 0.1);}
+ span.uibutton { padding:0.35em 0.40em; }
+.uibutton input , 
+.uibutton .lblinput { border:none; background:transparent;font-weight:bold; width:auto; white-space:nowrap; outline:medium none; cursor:pointer;  display:inline-block; font-size:13px; color:#FFF; font-family:"lucida grande",tahoma,verdana,arial,sans-serif; }
+.uicancel { background-position:left top;  border-color:#999 #999 #888;}
+.uicancel input , .uicancel .lblinput { color:#333;  display:inline-block;}
+.uiprimary { background-position:left -48px; }
+.uiprimary input {margin:0; padding:0; padding:0 .25em 0 .25em; width:auto;overflow:visible; cursor:pointer; }
+a.uiprimary,  a.uicancel { padding:0 0.5em; line-height: 2em; text-decoration:none!important; display:inline-block;}
+.uilarge { font-size:13px; padding:2px 6px;}
+.uibutton + .uibutton { margin-left:1em;}
+
+/* Exclude this */
+body { text-align:left; font-family: "Lucida Grande", Tahoma, Arial, sans-serif; font-size: 10px; color: #000; }
+img { border: 0; }
+p { font-size:1.1em;}
+code { font-size:11px; margin-bottom:1em; display:block;}
+h6 { font-size: 1.4em; margin:0 0 0.3em;}

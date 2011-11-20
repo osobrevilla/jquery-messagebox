@@ -1,0 +1,194 @@
+/* jQuery YellowBox plugin 
+ * Copyright 2010 Oscar Sobrevilla (oscar.sobrevilla@gmail.com)
+ * Released under the MIT and GPL licenses.
+ * version 1.5 Beta
+*/
+ 
+ $.extend($.fn, {
+	// yellowBox add Plugin	
+	yellowBox: function(options){
+		if(this && this.length){
+			var ybox = $.data(this[0], 'yellowBox');
+			if(ybox){ 
+				return ybox;
+			}
+		}
+		return this.each(function(){			  
+			var ybox = new $.YellowBox($(this), options);
+			$.data(this, 'yellowBox', ybox);
+		});	
+	}
+});
+ 
+$.YellowBox = function($this, options){
+	this.settings =  $.extend( true, {}, $.YellowBox.defaults, options);
+	this.ybox = $this;
+	this.tcontent = $('<div/>').html(this.ybox.html());
+	this.ybox.html(this.tcontent);
+	this.initialColor = this.ybox.css('backgroundColor');
+	this.btnsBar = $('<div class="ybox_btnbar" />'); 
+	this.timer;
+	this.init();
+};
+
+$.extend($.YellowBox, { 
+	/* Example use inline <div class="ybox" autofx="true" autoclose="true" timetoclose="15" manualclose="true" enfasis="true"></div> */
+	defaults: {
+		hideFx:'slideUp',
+		showFx:'fadeIn',
+		onClose: false,
+		timeToClose:15000,
+		manualClose:true,
+		autoClose:false,
+		speedFx:500,
+		intervalRept:1000,
+		//enfasisFx: { 
+		//	backgroundColor: '#FFE555'
+		//},
+		enfasisCustomFx: false, 
+		autoFx:false
+	},
+	
+	prototype:{
+		
+		init: function(){
+			
+			var this_ = this;
+			this.defaults = $.YellowBox.defaults;
+			$.extend(this.settings, {
+				manualClose: this.ybox.attr('manualclose') || this.defaults.manualClose,
+				timeToClose: this.ybox.attr('timetoclose') || this.defaults.timeToClose,
+				autoClose: this.ybox.attr('autoclose') || this.defaults.autoClose,
+				autoFx: (this.ybox.attr('autofx')) ? this.ybox.attr('autofx') : false
+			});
+			
+			if(this.settings.enfasisCustomFx && typeof(this.settings.enfasisCustomFx) == 'function' ){
+				this.fx = this.settings.enfasisCustomFx; 	
+			}
+			
+			if(this.settings.manualClose){
+				$closer = this.ybox.find('.close');
+				if(!$closer.length)
+					$closer = $('<a class="close" href="#" title="Cerrar"/>');
+				this.ybox.prepend($closer.click(function(e){ 
+					e.preventDefault(); 
+					this_.close(); 
+					this_.settings.onClose && this_.settings.onClose.apply(this_, [this]);
+				}));		
+			}
+			
+			
+			if(this.settings.autoClose){ 
+				this.closer();	
+			}
+			
+			if(this.settings.autoFx){  
+				this.enfasis(parseInt(this.settings.autoFx));	
+			}
+			
+		},
+		enfasis: function(numRepeat, speed, options){
+			var this_ = this;
+			var counter = 0;
+			var nrepeat = numRepeat || 1;
+			this_.fx(options, speed);
+			var timer = setInterval(function(){
+				if(counter < nrepeat - 1){ 
+					this_.fx(options, speed);
+					counter+=1;
+				}else{
+					clearInterval(timer);	
+				}
+				 
+			}, this.settings.intervalRept);
+			return this;
+		},
+		fx: function(options, speed){
+			var this_ = this;
+			//TO-DO 
+			// Hacer el efecto con css3 y para ie6 solo fadeIn<->Out
+			//this.ybox
+			//.animate($.extend(this.settings.enfasisFx, options), speed || 800)
+			//.animate({ backgroundColor: this.initialColor }, speed || 500);
+			clearTimeout(this.timer);
+			this_.ybox.addClass('emphasis');
+			this.timer = setTimeout(function(){
+				this_.ybox.removeClass('emphasis');
+			}, speed || this.settings.speedFx);
+		},
+		open: function(fx, speedFx, autoclose, timeToClose, callback){
+			this.ybox[(fx)? fx : this.settings.showFx]((speedFx || this.settings.speedFx), callback);
+			return this;
+		},
+		close: function(fx, speedFx, callback){ 
+			this.ybox[(fx)? fx : this.settings.hideFx]((speedFx || this.settings.speedFx), callback);
+			return this;
+		},
+		closer: function(timeToClose){		
+			var this_ = this;
+			setTimeout(function(){
+				this_.close();				
+			}, timeToClose || this.settings.timeToClose);	
+		},
+		makeBtns: function(btns){
+			var list_btns = [], this_ = this;
+			for(btnName in btns){
+				var $btn;  
+				(function(){ 
+					var btn = btns[btnName];
+					$btn = $('<span class="ybox_btn uibutton" />').addClass(btn.clsName).append(
+					$('<input type="button" />').bind('click.ybox_btn', function(){ 
+						btn.click && btn.click.apply(this_, [this]);
+					}).val(btnName || btn.value));
+					$btn.addClass(btn.clsName);
+				})(this);
+				
+				list_btns.push($btn.get(0));
+			}
+			return list_btns; 
+		},
+		setQuestion: function(q, btns){
+			this.setContent(q);
+			this.btnsBar.show().empty().append(this.makeBtns(btns));
+			this.ybox.append(this.btnsBar);
+		},
+		setContent: function(html, seconds, options){
+			var this_ = this;
+			this.open('slideDown', 'fast').enfasis();
+			this.btnsBar.hide();
+			this.tcontent.html(html);
+			if($.fn.toAnchor && options){
+				$.fn.toAnchor.goTarget(options);
+			}
+			if(seconds){
+				setTimeout(function(){
+					this_.close();				
+				}, (seconds || 5 ) * 1000);
+			}
+		}
+	}
+});
+
+
+/* jQuery toAnchor Scroll Animate plugin 
+ * Copyright 2009 Oscar Sobrevilla (oscar.sobrevilla@gmail.com)
+ * Released under the MIT and GPL licenses.
+ * version 1.0 Beta
+ */
+$.fn.toAnchor = function(_options){
+	var options = $.extend({ speed: 600 , animationShow:'show', animationFx: 'normal', onMove: false }, _options);
+	return $.each(this, function(){
+		$(this).bind('click', function(event){
+			event.preventDefault();
+			var target_ = $($(this).attr('href'))[options.animationShow](options.animationFx);
+			var correctionpos = parseInt($($(this).attr('rel'))) || 0;
+			$.fn.toAnchor.goTarget({ target: target_, speed: options.speed , cp: correctionpos, callback: callback });
+			if(options.onMove)
+				options.onMove($(this));
+		});							 
+	});
+};
+
+$.fn.toAnchor.goTarget = function(options){ 
+	$('html, body').animate({scrollTop: $(options.target).offset().top + ( options.cp || 0 ) }, (options.speed || 600), options.callback);
+};

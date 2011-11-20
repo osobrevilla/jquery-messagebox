@@ -1,0 +1,262 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>jQuery YellowBox Plugin Beta </title>
+  <link href="css/yellowbox.css" rel="stylesheet"  charset="utf-8" media="screen" type="text/css" />
+  <script src="js/jquery-1.4.2.min.js" type="text/javascript"></script>
+  <script src="js/jquery.color.js" type="text/javascript"></script>
+  <script src="js/jquery.yellowbox.js" type="text/javascript"></script>
+  <script type="text/javascript">
+  $(function () {
+      
+      $('.yellowbox').yellowBox();
+      
+      
+      // Example 1      
+      
+      
+      $('.example_1').click(function (e) {
+        e.preventDefault();
+        $('#yellowbox-1').data('api').enfasis(3);
+      });
+      
+      $('#yellowbox-1').data('api').enfasis();
+      
+      // Example 2
+      
+      $('.example_2').click(function (e) {
+          e.preventDefault();
+          $('#yellowbox-2').data('api').alert({
+              title: 'Hey There',
+              body: 'This message will close in 5 seconds'
+          }).closeIn(5000); // Close in 5 seconds
+      });
+
+      // Example 3      
+      
+      $('.example_3').click(function (e) {
+          e.preventDefault();
+          $('#yellowbox-3').data('api').confirm({
+            title: '¡Question!',
+            body: 'Is this process may take a few minutes, is sure to continue?',
+            buttons:{
+              'Aceptar':{
+                onClick: function(){
+                  alert("Ok");
+                }
+              },
+              'Cancelar':{
+                onClick: function(){
+                  this.close();
+                }
+              }
+            }
+          }).enfasis(2);
+      });
+      
+      
+
+  });
+  </script>
+</head>
+<body class="lyt_common loged">
+  <div class="bg_top">
+    <div id="wrapper">
+      <div id="header">
+        <h1>jQuery YellowBox Plugin Beta - Examples</h1>
+        <p>Soon more documentation on yellowbox other functions.</p>
+        <p> IE9+ , FF3.5+ , Google Chrome, Opera, Safari 5</p>
+      </div>
+      <hr/>
+      <div id="content" class="fix_flex">
+        <div class="content-inner">
+          <div id="content_main" class="col2 column">
+            <div class="content_main_inner">
+              <!-- info main -->
+              <div class="box_example">
+                
+                <h2>Basic HTML structure</h2>
+<pre>
+  ....
+  
+  &lt;div class=&quot;yellowbox&quot;&gt; 
+     &lt;div class=&quot;yellowbox-title&quot;&gt;Title Text&lt;/div&gt;
+     &lt;div class=&quot;yellowbox-body&quot;&gt;Any text or Messange here.&lt;/div&gt;
+  &lt;/div&gt;  
+  ....
+  
+  &lt;script type=&quot;text/javascript&quot; charset=&quot;utf-8&quot;&gt;
+    $(function(){
+      $('.yellowbox').yellowBox();
+    });
+  &lt;/script&gt;
+</pre>                  
+                
+                
+                <br /> <br /> 
+                <h2>Example I - Run on Dom ready.</h2>
+                 <div id="yellowbox-1" class="yellowbox"> 
+                    <div class="yellowbox-title">Atencion</div>
+                    <div class="yellowbox-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla egestas elit sed metus euismod sollicitudin.</div>
+                  </div>
+                  Hey <a href="#" class="example_1">Run enfasis again! (3 times)</a>
+                <p><strong>Code:</strong></p>
+
+<pre> 
+$(function() {
+  $('.yellowbox').yellowBox(); // previously initialized                
+  $('#yellowbox-1').data('api').enfasis();
+});
+</pre>
+               
+
+                <br /><br />
+
+                <h2>Example 2 - Trigger programatic alert.</h2>
+                
+                <div id="yellowbox-2" class="yellowbox"> 
+                  <div class="yellowbox-title"></div>
+                  <div class="yellowbox-body"> 
+                    A message will appear here programatically! <a href="#" class="example_2" >Click Here!!</a>
+                  </div>
+                </div>                
+                <p><strong>Code:</strong></p>
+<pre>
+  $('#yellowbox-2').data('api').alert({ 
+    title: 'Hey There',
+    body:  'This message will close in 5 seconds'
+  }).closeIn(5000);
+</pre>
+
+                
+                
+                
+                  <br /><br />
+                 <h2>Example 3 - Trigger programatic confirm.</h2>
+                  <div id="yellowbox-3" class="yellowbox"> 
+                     <div class="yellowbox-title">Hello Word!</div>
+                     <div class="yellowbox-body"> 
+                       What if it became a question with buttons and everything.
+                     </div>
+                   </div>
+                   <p>Create a question <a href="#" class="example_3" >Click Here!!</a></p>
+                  <p><strong>Code:</strong></p>
+<pre>
+  $('#yellowbox-3').data('api').confirm({
+    title: '¡Question!',
+    body: 'Is this process may take a few minutes, is sure to continue?',
+    buttons:{
+      'Aceptar':{
+        onClick: function(){
+          alert("Ok");
+        }
+      },
+      'Cancelar':{
+        onClick: function(){
+          this.close();
+        }
+      }
+    }
+  }).enfasis(2);
+</pre>
+
+
+<br /><br />
+<hr>
+<h2>CSS Code.</h2>
+ 
+<pre>
+
+  /* CSS Document */
+
+   .yellowbox {
+      -moz-transition: background 0.8s ease;
+      -webkit-transition: background 0.8s ease;
+      background:#FFFBE2;
+      border:1px solid #FFE222;
+      margin:0 0 10px;
+      padding:0 15px;
+      -moz-border-radius:2px;
+      -webkit-border-radius:2px;
+      border-radius:2px;
+  }
+  .yellowbox-closer {
+      width: 18px;
+      height: 18px;
+      margin: 1em 0 0;
+      display: block;
+      background: url(../img/close.gif) left top no-repeat;
+      float: right;
+  }
+  .yellowbox-title { font-weight: bold; margin: 1em 0;}
+  .yellowbox-body { margin: 1em 0; }
+  .yellowbox-buttons { margin: 2em 0 1.5em;}
+  .yellowbox-buttons span { margin-right: .7em; }
+  .yellowbox-emphasis { background: #FFE555; }
+  
+  /*   Buttons   */
+  
+  .yellowbox-button {
+      background-color: #DDDDDD;
+      background-image: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#DDDDDD)); /* Saf4+, Chrome */
+      background-image: -webkit-linear-gradient(top, #FFFFFF, #DDDDDD);
+      background-image: -moz-linear-gradient(top, #FFFFFF, #DDDDDD);
+      background-image: -ms-linear-gradient(top, #FFFFFF, #DDDDDD);
+      background-image: -o-linear-gradient(top, #FFFFFF, #DDDDDD);
+      background-image: linear-gradient(top, #FFFFFF, #DDDDDD);
+      border: 1px solid #ccc;
+      border-bottom: 1px solid #bbb;
+      -webkit-border-radius: 3px;
+      -moz-border-radius: 3px;
+      -ms-border-radius: 3px;
+      -o-border-radius: 3px;
+      border-radius: 3px;
+      color: #333;
+      font: bold 11px "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
+      line-height: 1;
+      padding: 6px 6px;
+      text-align: center;
+      text-shadow: 0 1px 0 #eee;
+      width: 75px;
+  }
+  .yellowbox-button:hover {
+      background-color: #EEEEEE;
+      background-image: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#EEEEEE)); /* Saf4+, Chrome */
+      background-image: -webkit-linear-gradient(top, #FFFFFF, #EEEEEE);
+      background-image: -moz-linear-gradient(top, #FFFFFF, #EEEEEE);
+      background-image: -ms-linear-gradient(top, #FFFFFF, #EEEEEE);
+      background-image: -o-linear-gradient(top, #FFFFFF, #EEEEEE);
+      background-image: linear-gradient(top, #FFFFFF, #EEEEEE);
+      border: 1px solid #bbb;
+      border-bottom: 1px solid #999;
+      cursor: pointer;
+      text-shadow: 0 1px 0 #ddd;
+  }
+  .yellowbox-button:active {
+      border: 1px solid #aaa;
+      border-bottom: 1px solid #888;
+      -webkit-box-shadow: inset 0 0 5px 2px #aaaaaa, 0 1px 0 0 #eeeeee;
+      -moz-box-shadow: inset 0 0 5px 2px #aaaaaa, 0 1px 0 0 #eeeeee;
+      -ms-box-shadow: inset 0 0 5px 2px #aaaaaa, 0 1px 0 0 #eeeeee;
+      -o-box-shadow: inset 0 0 5px 2px #aaaaaa, 0 1px 0 0 #eeeeee;
+      box-shadow: inset 0 0 5px 2px #aaaaaa, 0 1px 0 0 #eeeeee;
+  }
+</pre>              
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
+      <br />
+      <br />
+      <hr>
+      
+      <div id="footer">
+        <p class="right">  © Oscar Sobrevilla </p>
+      </div>
+    </div>
+  </body>
+  </html>
