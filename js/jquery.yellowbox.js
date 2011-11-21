@@ -120,12 +120,12 @@
             }));
         }
         return {
-            enfasis: self.enfasis,
-            confirm: self.setQuestion,
-            alert: self.setMessage,
-            show: self.show,
-            close: self.close,
-            closeIn: self.closeIn
+            'enfasis': self.enfasis,
+            'confirm': self.setQuestion,
+            'alert': self.setMessage,
+            'show': self.show,
+            'close': self.close,
+            'closeIn': self.closeIn
         }
     });
     YellowBox.defaults = ({
