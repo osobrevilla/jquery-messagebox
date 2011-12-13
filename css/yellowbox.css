@@ -1,10 +1,8 @@
-﻿/* CSS jQuery YellowBox plugin 
-* Copyright 2010 Oscar Sobrevilla (oscar.sobrevilla@gmail.com)
-* Released under the MIT and GPL licenses.
-* version 1.5 Beta
-* Require: jquery.color.js By (John Resig)
-*/
-/* CSS Page  */
+﻿/* CSS jQuery YellowBox plugin (Beta)
+ * Copyright 2011 Oscar Sobrevilla (oscar.sobrevilla@gmail.com)
+ * Released under the MIT and GPL licenses.
+ * version 1.0 Beta
+ */
 
 /* Exclude this */
 body { text-align:left; font: 11px "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif; font-size: 12px; color: #000; margin: 40px 15% 40px; }

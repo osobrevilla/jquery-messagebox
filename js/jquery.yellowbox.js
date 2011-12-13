@@ -7,7 +7,7 @@
 //   <div class="yellowbox-title"></div>
 //   <div class="yellowbox-body"></div>
 // </div>
-(function ($) {
+(function ($, w) {
     $.fn.yellowBox = (function (options) {
         var t = this;
         if (t && t.length) {
@@ -31,24 +31,24 @@
                         nrepeat = numRepeat || 1,
                         timer;
                     self.fx(options, speed);
-                    timer = setInterval(function () {
+                    timer = w.setInterval(function () {
                         if (counter < nrepeat - 1) {
                             self.fx(options, speed);
                             counter += 1;
                         } else {
-                            clearInterval(timer);
+                            w.clearInterval(timer);
                         }
                     }, settings.intervalRept);
                     return this;
                 },
                 fx: function (options, speed) {
                     //TO-DO 
-                    // make the effect with css3 to IE6-7-8 versions, only fadeIn<->Out
+                    // make the effects css3 with javascript to IE6-7-8 versions, only fadeIn<->Out
                     //.animate($.extend(settings.enfasisFx, options), speed || 800)
                     //.animate({ backgroundColor: this.initialColor }, speed || 500);
-                    clearTimeout(timer);
+                    w.clearTimeout(timer);
                     yellowBox.addClass('yellowbox-emphasis');
-                    timer = setTimeout(function () {
+                    timer = w.setTimeout(function () {
                         yellowBox.removeClass('yellowbox-emphasis');
                     }, speed || settings.speedFx);
                 },
@@ -77,14 +77,14 @@
                                 }
                                 e.preventDefault();
                             });
-                        })();
+                        }());
                         listButtons.push($btn.get(0));
                     }
                     return listButtons;
                 },
                 setMainContent: function (title, body) {
-                    yellowBox.find('.yellowbox-title').html(title || "");
-                    yellowBox.find('.yellowbox-body').html(body || "");
+                    yellowBox.find('.yellowbox-title').html(title || '');
+                    yellowBox.find('.yellowbox-body').html(body || '');
                 },
                 setQuestion: function (options) {
                     options = options || {};
@@ -99,7 +99,7 @@
                     boxButtons.hide();
                     self.setMainContent(options.title, options.body);
                     if (options.seconds) {
-                        setTimeout(function () {
+                        w.setTimeout(function () {
                             self.close();
                         }, (seconds || 5) * 1000);
                     }
@@ -110,7 +110,7 @@
                   // Only Webkit (Google Chrome and Safari 5)
                   if (yellowBox.hasClass('yellowbox-shake')) return;
                     yellowBox
-                      .css("-webkit-animation-duration", settings.shakeDuration + "s")
+                      .css('-webkit-animation-duration', settings.shakeDuration + 's')
                       .addClass('yellowbox-shake')
                       .data('yellowbox-callback', callback);
                 }
@@ -157,4 +157,4 @@
         enfasisCustomFx: false,
         autoFx: false
     });
-}(jQuery));
+}(jQuery, window));
