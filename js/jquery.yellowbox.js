@@ -9,12 +9,14 @@
 // </div>
 (function ($) {
     $.fn.yellowBox = (function (options) {
-        if (this && this.length) {
-            var yBox = $.data(this[0], 'api');
+        var t = this;
+        if (t && t.length) {
+            var yBox = $.data(t[0], 'api');
             if (yBox) return yBox;
         }
-        return this.each(function () {
-            $.data(this, 'api', new YellowBox($(this), options));
+        return t.each(function () {
+            var self = this;
+            $.data(self, 'api', new YellowBox($(self), options));
         });
     });
     var YellowBox = (function (elem, options) {
@@ -97,15 +99,21 @@
                     self.show('slideDown', 'fast').enfasis();
                     boxButtons.hide();
                     self.setMainContent(options.title, options.body);
-                    if (options.target && $.fn.toAnchor) {
-                        $.fn.toAnchor.goTarget(options);
-                    }
                     if (options.seconds) {
                         setTimeout(function () {
                             self.close();
                         }, (seconds || 5) * 1000);
                     }
                     return self;
+                },
+                
+                shake: function(callback){
+                  // Only Webkit (Google Chrome and Safari 5)
+                  if (yellowBox.hasClass('yellowbox-shake')) return;
+                    yellowBox
+                      .css("-webkit-animation-duration", settings.shakeDuration + "s")
+                      .addClass('yellowbox-shake')
+                      .data('yellowbox-callback', callback);
                 }
             };
         if (settings.closer) {
@@ -118,8 +126,16 @@
                 self.close();
                 if (settings.onClose) settings.onClose.call(self, this);
             }));
+            
+            yellowBox.bind('animationend webkitAnimationEnd', function(){ 
+              yellowBox.removeClass('yellowbox-shake');
+              if ( yellowBox.data('yellowbox-callback'))
+                yellowBox.data('yellowbox-callback').call(self, this);
+                yellowBox.removeData('yellowbox-callback');
+            });
         }
         return {
+            'shake': self.shake,
             'enfasis': self.enfasis,
             'confirm': self.setQuestion,
             'alert': self.setMessage,
@@ -137,42 +153,9 @@
         manualClose: true,
         autoClose: false,
         speedFx: 500,
+        shakeDuration:1.1, //seconds
         intervalRept: 1000,
         enfasisCustomFx: false,
         autoFx: false
     });
-}(jQuery));
-/* jQuery toAnchor Scroll Animate plugin 
- * Copyright 2009 Oscar Sobrevilla (oscar.sobrevilla@gmail.com)
- * Released under the MIT and GPL licenses.
- * version 1.0 Beta
- */
-(function ($) {
-    $.fn.toAnchor = function (_options) {
-        var options = $.extend({
-            speed: 600,
-            animationShow: 'show',
-            animationFx: 'normal',
-            onMove: false
-        }, _options);
-        return $.each(this, function () {
-            $(this).bind('click', function (event) {
-                event.preventDefault();
-                var target_ = $($(this).attr('href'))[options.animationShow](options.animationFx);
-                var correctionpos = parseInt($($(this).attr('rel'))) || 0;
-                $.fn.toAnchor.goTarget({
-                    target: target_,
-                    speed: options.speed,
-                    cp: correctionpos,
-                    callback: callback
-                });
-                if (options.onMove) options.onMove($(this));
-            });
-        });
-    };
-    $.fn.toAnchor.goTarget = function (options) {
-        $('html, body').animate({
-            scrollTop: $(options.target).offset().top + (options.cp || 0)
-        }, (options.speed || 600), options.callback);
-    };
 }(jQuery));

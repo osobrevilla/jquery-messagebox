@@ -5,7 +5,7 @@
   <title>jQuery YellowBox Plugin Beta </title>
   <link href="css/yellowbox.css" rel="stylesheet"  charset="utf-8" media="screen" type="text/css" />
   <script src="js/jquery-1.4.2.min.js" type="text/javascript"></script>
-  <script src="js/jquery.color.js" type="text/javascript"></script>
+  <!--script src="js/jquery.color.js" type="text/javascript"></script-->
   <script src="js/jquery.yellowbox.js" type="text/javascript"></script>
   <script type="text/javascript">
   $(function () {
@@ -55,6 +55,15 @@
           }).enfasis(2);
       });
       
+      // Example 4      
+      
+      $('.example_4').bind('click', function (e) {
+          e.preventDefault();        
+          $('#yellowbox-4').data('api').shake(function(){
+              alert('Animation finished');
+          });
+      });      
+      
       
 
   });
@@ -65,7 +74,7 @@
     <div id="wrapper">
       <div id="header">
         <h1>jQuery YellowBox Plugin Beta - Examples</h1>
-        <p>Soon more documentation on yellowbox other functions.</p>
+        <p>Soon more documentation.</p>
         <p> IE9+ , FF3.5+ , Google Chrome, Opera, Safari 5</p>
       </div>
       <hr/>
@@ -160,6 +169,24 @@ $(function() {
     }
   }).enfasis(2);
 </pre>
+ <br /><br />
+ <h2>Example 4 - Shake Animation.</h2>
+  <div id="yellowbox-4" class="yellowbox"> 
+     <div class="yellowbox-title">ShakeMe!!</div>
+     <div class="yellowbox-body"> 
+       this box for your eyes dance. Shake shake!!
+     </div>
+   </div>
+   <p>Hey <a href="#" class="example_4" >Shake!</a></p>
+  <p><strong>Code:</strong></p>
+  <pre>
+$('.example_4').bind('click', function (e) {
+    e.preventDefault();        
+    $('#yellowbox-4').data('api').shake(function(){
+        alert('Animation finished');
+    });
+});
+  </pre>
 
 
 <br /><br />
@@ -167,83 +194,107 @@ $(function() {
 <h2>CSS Code.</h2>
  
 <pre>
+  /* jQuery YellowBox Plugin Beta
+  -----------------------------------------------------------------*/
 
-  /* CSS Document */
-
-   .yellowbox {
-      -moz-transition: background 0.8s ease; 
-      -webkit-transition: background 0.8s ease; 
-      -o-transition: background 0.8s ease; 
-      -ms-transition: background 0.8s ease; 
-      transition: background 0.8s ease;  
-      background:#FFFBE2;
-      border:1px solid #FFE222;
-      margin:0 0 10px;
-      padding:0 15px;
-      -moz-border-radius:2px;
-      -webkit-border-radius:2px;
-      border-radius:2px;
-  }
-  .yellowbox-closer {
-      width: 18px;
-      height: 18px;
-      margin: 1em 0 0;
-      display: block;
-      background: url(../img/close.gif) left top no-repeat;
-      float: right;
-  }
-  .yellowbox-title { font-weight: bold; margin: 1em 0;}
-  .yellowbox-body { margin: 1em 0; }
+  .yellowbox { -moz-transition: background 0.8s ease; -webkit-transition: background 0.8s ease; -o-transition: background 0.8s ease; -ms-transition: background 0.8s ease; transition: background 0.8s ease;  background:#FFFBE2; border:1px solid #FFE222; margin:0 0 10px; padding:0 15px; -moz-border-radius:2px; -webkit-border-radius:2px; border-radius:2px;}
+  .yellowbox-closer { width: 18px; height: 18px; margin: 1em 0 0; display: block; background: url(../img/close.gif) left top no-repeat; float: right;}
+  .yellowbox-closer:hover { background-position: right top;}
+  .yellowbox-title { font-weight: bold; margin: 1em 0; }
+  .yellowbox-body { margin: 1em 0;}
   .yellowbox-buttons { margin: 2em 0 1.5em;}
-  .yellowbox-buttons span { margin-right: .7em; }
-  .yellowbox-emphasis { background: #FFE555; }
-  
-  /*   Buttons   */
-  
+  .yellowbox-buttons span {margin-right: .7em;}
+  .yellowbox-emphasis { background: #FFE555 ;}
   .yellowbox-button {
-      background-color: #DDDDDD;
-      background-image: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#DDDDDD)); /* Saf4+, Chrome */
-      background-image: -webkit-linear-gradient(top, #FFFFFF, #DDDDDD);
-      background-image: -moz-linear-gradient(top, #FFFFFF, #DDDDDD);
-      background-image: -ms-linear-gradient(top, #FFFFFF, #DDDDDD);
-      background-image: -o-linear-gradient(top, #FFFFFF, #DDDDDD);
-      background-image: linear-gradient(top, #FFFFFF, #DDDDDD);
-      border: 1px solid #ccc;
-      border-bottom: 1px solid #bbb;
-      -webkit-border-radius: 3px;
-      -moz-border-radius: 3px;
-      -ms-border-radius: 3px;
-      -o-border-radius: 3px;
-      border-radius: 3px;
-      color: #333;
-      font: bold 11px "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
-      line-height: 1;
-      padding: 6px 6px;
-      text-align: center;
-      text-shadow: 0 1px 0 #eee;
-      width: 75px;
+    background-color: #DDDDDD;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#DDDDDD));
+    /* Saf4+, Chrome */
+    background-image: -webkit-linear-gradient(top, #FFFFFF, #DDDDDD);
+    background-image: -moz-linear-gradient(top, #FFFFFF, #DDDDDD);
+    background-image: -ms-linear-gradient(top, #FFFFFF, #DDDDDD);
+    background-image: -o-linear-gradient(top, #FFFFFF, #DDDDDD);
+    background-image: linear-gradient(top, #FFFFFF, #DDDDDD);
+    border: 1px solid #ccc;
+    border-bottom: 1px solid #bbb;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+    border-radius: 3px;
+    color: #333;
+    font: bold 11px "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
+    line-height: 1;
+    padding: 6px 6px;
+    text-align: center;
+    text-shadow: 0 1px 0 #eee;
+    width: 75px; 
   }
   .yellowbox-button:hover {
-      background-color: #EEEEEE;
-      background-image: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#EEEEEE)); /* Saf4+, Chrome */
-      background-image: -webkit-linear-gradient(top, #FFFFFF, #EEEEEE);
-      background-image: -moz-linear-gradient(top, #FFFFFF, #EEEEEE);
-      background-image: -ms-linear-gradient(top, #FFFFFF, #EEEEEE);
-      background-image: -o-linear-gradient(top, #FFFFFF, #EEEEEE);
-      background-image: linear-gradient(top, #FFFFFF, #EEEEEE);
-      border: 1px solid #bbb;
-      border-bottom: 1px solid #999;
-      cursor: pointer;
-      text-shadow: 0 1px 0 #ddd;
+    background-color: #EEEEEE;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#EEEEEE));
+    /* Saf4+, Chrome */
+    background-image: -webkit-linear-gradient(top, #FFFFFF, #EEEEEE);
+    background-image: -moz-linear-gradient(top, #FFFFFF, #EEEEEE);
+    background-image: -ms-linear-gradient(top, #FFFFFF, #EEEEEE);
+    background-image: -o-linear-gradient(top, #FFFFFF, #EEEEEE);
+    background-image: linear-gradient(top, #FFFFFF, #EEEEEE);
+    border: 1px solid #bbb;
+    border-bottom: 1px solid #999;
+    cursor: pointer;
+    text-shadow: 0 1px 0 #ddd; 
   }
   .yellowbox-button:active {
-      border: 1px solid #aaa;
-      border-bottom: 1px solid #888;
-      -webkit-box-shadow: inset 0 0 5px 2px #aaaaaa, 0 1px 0 0 #eeeeee;
-      -moz-box-shadow: inset 0 0 5px 2px #aaaaaa, 0 1px 0 0 #eeeeee;
-      -ms-box-shadow: inset 0 0 5px 2px #aaaaaa, 0 1px 0 0 #eeeeee;
-      -o-box-shadow: inset 0 0 5px 2px #aaaaaa, 0 1px 0 0 #eeeeee;
-      box-shadow: inset 0 0 5px 2px #aaaaaa, 0 1px 0 0 #eeeeee;
+    border: 1px solid #aaa;
+    border-bottom: 1px solid #888;
+    -webkit-box-shadow: inset 0 0 5px 2px #aaaaaa, 0 1px 0 0 #eeeeee;
+    -moz-box-shadow: inset 0 0 5px 2px #aaaaaa, 0 1px 0 0 #eeeeee;
+    -ms-box-shadow: inset 0 0 5px 2px #aaaaaa, 0 1px 0 0 #eeeeee;
+    -o-box-shadow: inset 0 0 5px 2px #aaaaaa, 0 1px 0 0 #eeeeee;
+    box-shadow: inset 0 0 5px 2px #aaaaaa, 0 1px 0 0 #eeeeee; 
+  }
+
+
+  /* Animation - shake 
+  -----------------------------------------------------------------*/
+  @-webkit-keyframes animationShake {
+
+    0%{ -webkit-transform: translate(0, 0) }
+
+    10% { -webkit-transform: translate(-2.5px, -.02px) }
+    15% { -webkit-transform: translate(2.5px, .02px) }
+
+    20% { -webkit-transform: translate(-5px, -.05px) }
+    25% { -webkit-transform: translate(5px, .05px) }
+
+    30% { -webkit-transform: translate(-10px, -.10px) }
+    35% { -webkit-transform: translate(10px, .10px) }
+
+    40% { -webkit-transform: translate(-15px, -.15px) }
+    45% { -webkit-transform: translate(15px, .15px) }
+
+    50% { -webkit-transform: translate(-20px, -.20px) }
+    55% { -webkit-transform: translate(20px, .20px) }
+
+    60% { -webkit-transform: translate(-15px, -.15px) }
+    65% { -webkit-transform: translate(15px, .15px) }
+
+    70% { -webkit-transform: translate(-10px, -.10px) }
+    75% { -webkit-transform: translate(10px, .10px) }
+
+    80% { -webkit-transform: translate(-5px, -.05px) }
+    85% { -webkit-transform: translate(5px, .05px) }
+
+    90% { -webkit-transform: translate(-2.5px, -.02px) }
+    95% { -webkit-transform: translate(2.5px, .02px) }
+
+    100%{ -webkit-transform: translate(0, 0) }
+
+  }
+  .yellowbox.yellowbox-shake {
+    -webkit-animation-name: animationShake;
+    -webkit-transform-origin:50% 50%;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: linear;
   }
 </pre>              
 
@@ -258,7 +309,7 @@ $(function() {
       <hr>
       
       <div id="footer">
-        <p class="right">  © Oscar Sobrevilla </p>
+        <p class="right">  © Oscar Sobrevilla <a href="mailto:oscar.sobrevilla@gmail.com">oscar.sobrevilla@gmail.com</a> </p>
       </div>
     </div>
   </body>
