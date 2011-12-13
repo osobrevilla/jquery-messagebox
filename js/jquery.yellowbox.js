@@ -1,7 +1,7 @@
-/* jQuery YellowBox plugin 
- * Copyright 2010 Oscar Sobrevilla (oscar.sobrevilla@gmail.com)
+/* jQuery YellowBox plugin (Beta)
+ * Copyright 2011 Oscar Sobrevilla (oscar.sobrevilla@gmail.com)
  * Released under the MIT and GPL licenses.
- * version 1.5 Beta
+ * version 1.0 Beta
  */
 // <div class="yellowbox">
 //   <div class="yellowbox-title"></div>
@@ -43,8 +43,7 @@
                 },
                 fx: function (options, speed) {
                     //TO-DO 
-                    // Hacer el efecto con css3 y para ie6 solo fadeIn<->Out
-                    //yellowbox
+                    // make the effect with css3 to IE6-7-8 versions, only fadeIn<->Out
                     //.animate($.extend(settings.enfasisFx, options), speed || 800)
                     //.animate({ backgroundColor: this.initialColor }, speed || 500);
                     clearTimeout(timer);
