@@ -256,6 +256,40 @@ $('.example_4').bind('click', function (e) {
 
   /* Animation - shake 
   -----------------------------------------------------------------*/
+  @-moz-keyframes animationShake { 
+  
+  0% { -moz-transform: translate(0, 0); }
+  
+  10% { -moz-transform: translate(-2.5px, -.02px); }
+  15% { -moz-transform: translate(2.5px, .02px); }
+  
+  20% { -moz-transform: translate(-5px, -.05px)}
+  25% { -moz-transform: translate(5px, .05px)}
+     
+   30% { -moz-transform: translate(-10px, -.10px)}
+   35% { -moz-transform: translate(10px, .10px);}
+   
+   40% { -moz-transform: translate(-15px, -.15px)}
+   
+   45% { -moz-transform: translate(15px, .15px)}
+   50% { -moz-transform: translate(-20px, -.20px);}
+   
+   55% { -moz-transform: translate(20px, .20px);}
+   60% { -moz-transform: translate(-15px, -.15px) }
+  
+   65% { -moz-transform: translate(15px, .15px);}
+   70% { -moz-transform: translate(-10px, -.10px);}
+   
+   75% { -moz-transform: translate(10px, .10px);}
+   80% { -moz-transform: translate(-5px, -.05px); }
+   
+   85% { -moz-transform: translate(5px, .05px); }
+   90% { -moz-transform: translate(-2.5px, -.02px);}
+   
+   95% { -moz-transform: translate(2.5px, .02px); }
+   100% { -moz-transform: translate(0, 0); }
+ }
+    
   @-webkit-keyframes animationShake {
 
     0%{ -webkit-transform: translate(0, 0) }
@@ -291,6 +325,11 @@ $('.example_4').bind('click', function (e) {
 
   }
   .yellowbox.yellowbox-shake {
+    -moz-animation-name: animationShake;
+    -moz-transform-origin:50% 50%;
+    -moz-animation-iteration-count: 1;
+    -moz-animation-timing-function: linear;
+        
     -webkit-animation-name: animationShake;
     -webkit-transform-origin:50% 50%;
     -webkit-animation-iteration-count: 1;
