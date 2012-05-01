@@ -18,10 +18,10 @@
       
       $('.example_1').click(function (e) {
         e.preventDefault();
-        $('#yellowbox-1').data('api').enfasis(3);
+        $('#yellowbox-1').data('api').blink(3);
       });
       
-      $('#yellowbox-1').data('api').enfasis();
+      $('#yellowbox-1').data('api').blink();
       
       // Example 2
       
@@ -52,7 +52,7 @@
                 }
               }
             }
-          }).enfasis(2);
+          }).blink(2);
       });
       
       // Example 4      
@@ -109,13 +109,13 @@
                     <div class="yellowbox-title">Atencion</div>
                     <div class="yellowbox-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla egestas elit sed metus euismod sollicitudin.</div>
                   </div>
-                  Hey <a href="#" class="example_1">Run enfasis again! (3 times)</a>
+                  Hey <a href="#" class="example_1">Run blink again! (3 times)</a>
                 <p><strong>Code:</strong></p>
 
 <pre> 
 $(function() {
   $('.yellowbox').yellowBox(); // previously initialized                
-  $('#yellowbox-1').data('api').enfasis(3);
+  $('#yellowbox-1').data('api').blink(3);
 });
 </pre>
                
@@ -167,7 +167,7 @@ $(function() {
         }
       }
     }
-  }).enfasis(2);
+  }).blink(2);
 </pre>
  <br /><br />
  <h2>Example 4 - Shake Animation.</h2>

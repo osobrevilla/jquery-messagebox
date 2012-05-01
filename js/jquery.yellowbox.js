@@ -2,7 +2,8 @@
  * Copyright 2011 Oscar Sobrevilla (oscar.sobrevilla@gmail.com)
  * Released under the MIT and GPL licenses.
  * version 1.0 Beta
- */ (function ($) {
+ */
+(function ($) {
 
   'use strict';
 
@@ -43,12 +44,11 @@
       that.timer = null;
       // Set Timer closeIn 
       that.timerIn = null;
-      // Set onAnimationEnd
-      that.animationEnd = null;
       // Set custom settings
       that.setup();
     };
 
+  // Default options
   YellowBox.defaults = {
     hideFx: 'slideUp',
     showFx: 'fadeIn',
@@ -64,9 +64,14 @@
   };
 
   YellowBox.prototype = {
+
+    /**
+     * Setup 
+     */
+
     setup: function () {
       var that = this,
-        close, anim;
+        close;
       if(that.options.closer) {
         that.closer = that.el.find('.close');
         if(!that.closer.length) {
@@ -76,16 +81,8 @@
           e.preventDefault();
           that.close();
         };
-        anim = function (e) {
-          if(that.animationend) {
-            that.animationEnd(e);
-            that.animationend = null;
-          }
-          $(this).removeClass('yellowbox-shake');
-        };
         that.el.prepend(
         that.closer.bind('click.yellowbox', close));
-        that.el.bind('animationend webkitAnimationEnd', anim);
       }
     },
 
@@ -117,15 +114,17 @@
     buildBtns: function (buttons) {
       var that = this,
         listButtons = [];
-      $.each(buttons || [], function (i) {
-        var button = buttons[i];
-        listButtons.push(
-        $('<span class="yellowbox-button" />').html(button.btnName).addClass(button.className).bind('click.yellowbox', function (e) {
+      $.each(buttons || [], function (label) {
+        var button = this,
+          btn = $('<span class="yellowbox-button" />');
+        btn.html(label);
+        btn.addClass(button.className).bind('click.yellowbox', function (e) {
           e.preventDefault();
           if(button.onClick) {
             button.onClick.call(that, this, e);
           }
-        }).get(0));
+        });
+        listButtons.push(btn.get(0));
       });
       return listButtons;
     },
@@ -154,7 +153,6 @@
       return that;
     },
 
-
     /**
      * Shake the yellowbox
      * @param callback {function}
@@ -163,8 +161,12 @@
     shake: function (callback, duration) {
       var that = this;
       if(!that.el.hasClass('yellowbox-shake')) {
-        that.animationend = callback;
-        that.el.css('animation-duration', duration || that.options.shakeDuration + 's').addClass('yellowbox-shake');
+        that.el.one('animationend webkitAnimationEnd', function (e) {
+          if(callback) {
+            callback.call(that, this, e);
+          }
+          that.el.removeClass('yellowbox-shake');
+        }).css('animation-duration', duration || that.options.shakeDuration + 's').addClass('yellowbox-shake');
       }
       return this;
     },
@@ -248,7 +250,7 @@
     setMessage: function (options) {
       var that = this;
       options = options || {};
-      that.show('slideDown', 'fast').blink();
+      that.show(null, 'slideDown', 'fast').blink();
       that.boxButtons.hide();
       that.setContent(options.title, options.body);
       if(options.seconds) {
@@ -257,6 +259,15 @@
         }, (options.seconds || 5) * 1E3);
       }
       return that;
+    },
+    enfasis: function (callback, duration) {
+      return this.blink(callback, duration);
+    },
+    confirm: function (options) {
+      return this.setQuestion(options);
+    },
+    alert: function (options) {
+      return this.setMessage(options);
     }
   };
 
