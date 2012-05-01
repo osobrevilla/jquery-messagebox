@@ -259,18 +259,14 @@
         }, (options.seconds || 5) * 1E3);
       }
       return that;
-    },
-    enfasis: function (callback, duration) {
-      return this.blink(callback, duration);
-    },
-    confirm: function (options) {
-      return this.setQuestion(options);
-    },
-    alert: function (options) {
-      return this.setMessage(options);
     }
   };
 
+  // For prevent old versions errors
+  YellowBox.prototype.enfasis = YellowBox.prototype.blink;
+  YellowBox.prototype.confirm = YellowBox.prototype.setQuestion;
+  YellowBox.prototype.alert   = YellowBox.prototype.setMessage;
+  
   // add Yellowbox Class to jQuery fn.
   $.fn.yellowBox = function (options) {
     var t = this,
