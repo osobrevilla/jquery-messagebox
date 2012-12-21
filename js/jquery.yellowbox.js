@@ -266,10 +266,6 @@
     }
   };
 
-  // For prevent old versions errors
-  YellowBox.prototype.enfasis = YellowBox.prototype.blink;
-  YellowBox.prototype.confirm = YellowBox.prototype.setQuestion;
-  YellowBox.prototype.alert   = YellowBox.prototype.setMessage;
   // Set Constructor
   YellowBox.prototype.constructor = YellowBox;
   
