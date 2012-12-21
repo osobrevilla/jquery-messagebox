@@ -158,7 +158,7 @@ code, pre {
    100%{ -webkit-transform: translate(0, 0) }
 
  }
- .yellowbox.yellowbox-shake {
+ .animation-shake {
    -moz-animation-name: animationShake;
    -moz-animation-duration: 1.1s;
    -moz-transform-origin:50% 50%;

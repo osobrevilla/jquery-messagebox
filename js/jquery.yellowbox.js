@@ -40,6 +40,11 @@
       that.boxInitBgColor = that.el.css('backgroundColor') || "white";
       // Set box buttons
       that.boxButtons = $('<div class="yellowbox-buttons" />');
+      // Other dom objets
+      that.dom = {};
+      that.dom.title  = that.el.find('.yellowbox-title');
+      that.dom.body   = that.el.find('.yellowbox-body');
+      that.dom.closer = that.el.find('.close');
       // Set Timer 
       that.timer = null;
       // Set Timer closeIn 
@@ -55,7 +60,7 @@
     speedFx: 500,
     closer: true,
     onClose: false,
-    onShow: false,
+    onOpen: false,
     timeToClose: 5000,
     shakeDuration: 1.1,
     intervalRpt: 1000,
@@ -73,16 +78,14 @@
       var that = this,
         close;
       if(that.options.closer) {
-        that.closer = that.el.find('.close');
-        if(!that.closer.length) {
-          that.closer = $('<a class="yellowbox-closer" href="#close" title="' + that.options.strClose + '"/>');
+        if(!that.dom.closer.size()) {
+          that.dom.closer = $('<a class="yellowbox-closer" href="#close" title="' + that.options.strClose + '"/>');
         }
-        close = function (e) {
+        that.el.prepend(
+        that.dom.closer.on('click.yellowbox', function(e){
           e.preventDefault();
           that.close();
-        };
-        that.el.prepend(
-        that.closer.bind('click.yellowbox', close));
+        }));
       }
     },
 
@@ -118,7 +121,7 @@
         var button = this,
           btn = $('<span class="yellowbox-button" />');
         btn.html(label);
-        btn.addClass(button.className).bind('click.yellowbox', function (e) {
+        btn.addClass(button.className).on('click.yellowbox', function (e) {
           e.preventDefault();
           if(button.onClick) {
             button.onClick.call(that, this, e);
@@ -161,12 +164,12 @@
     shake: function (callback, duration) {
       var that = this;
       if(!that.el.hasClass('yellowbox-shake')) {
-        that.el.one('animationend webkitAnimationEnd', function (e) {
+        that.el.one('animationend webkitAnimationEnd oAnimationEnd', function (e) {
           if(callback) {
             callback.call(that, this, e);
           }
-          that.el.removeClass('yellowbox-shake');
-        }).css('animation-duration', duration || that.options.shakeDuration + 's').addClass('yellowbox-shake');
+          that.el.removeClass('animation-shake');
+        }).css('animation-duration', duration || that.options.shakeDuration + 's').addClass('animation-shake');
       }
       return this;
     },
@@ -181,8 +184,8 @@
     show: function (callback, fx, speed) {
       var that = this;
       that.el[fx || that.options.showFx](speed || that.options.speedFx, callback);
-      if(that.options.onShow) {
-        that.options.onShow(this);
+      if(that.options.onOpen) {
+        that.options.onOpen(this);
       }
       return that;
     },
@@ -238,7 +241,8 @@
      * @param body {String/HtmlString}
      */
     setContent: function (title, body) {
-      this.el.find('.yellowbox-title').html(title || '').end().find('.yellowbox-body').html(body || '');
+      this.dom.title.html(title || '');
+      this.dom.body.html(body || '');
       return this;
     },
 
@@ -266,6 +270,8 @@
   YellowBox.prototype.enfasis = YellowBox.prototype.blink;
   YellowBox.prototype.confirm = YellowBox.prototype.setQuestion;
   YellowBox.prototype.alert   = YellowBox.prototype.setMessage;
+  // Set Constructor
+  YellowBox.prototype.constructor = YellowBox;
   
   // add Yellowbox Class to jQuery fn.
   $.fn.yellowBox = function (options) {
