@@ -32,7 +32,7 @@ code, pre {
 -----------------------------------------------------------------*/
 
 .yellowbox { -moz-transition: background 0.8s ease; -webkit-transition: background 0.8s ease; -o-transition: background 0.8s ease; -ms-transition: background 0.8s ease; transition: background 0.8s ease;  background:#FFFBE2; border:1px solid #FFE222; margin:0 0 10px; padding:0 15px; -moz-border-radius:2px; -webkit-border-radius:2px; border-radius:2px;}
-.yellowbox-closer { width: 18px; height: 18px; margin: 1em 0 0; display: block; background: url(../img/close.gif) left top no-repeat; float: right;}
+.yellowbox-closer { width: 18px; height: 18px; margin: 1em 0 0; display: block; background: url(data:image/gif;base64,R0lGODlhJAASALMAAP/////dZP/eX//eXP/WOP/XNv/WN//XN//VOP/SPP7RPv/MAP/LAP///wAAAAAAACH5BAEHAA0ALAAAAAAkABIAAAR2sMlJ6xwr681XsGDVjVxoNmS6nKFKVoiliBvQ2RtF7JRhJJQaAJcZEleUglKiLNA0RgbDWKo0m5abcdgBXUGj7ciLzWq5XevV+YRujxk1uzzhUBd3TXI5oaPcR3lIfRYGbXg3VSyHLnGLjI2PkC6SFBguUlICEQA7) left top no-repeat; float: right;}
 .yellowbox-closer:hover { background-position: right top;}
 .yellowbox-title { font-weight: bold; margin: 1em 0; }
 .yellowbox-body { margin: 1em 0;}
