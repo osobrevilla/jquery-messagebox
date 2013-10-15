@@ -9,64 +9,60 @@
   <script src="js/jquery.yellowbox.js" type="text/javascript"></script>
   <script type="text/javascript">
   $(function () {
-      
-      $('.yellowbox').yellowBox();
-      
-      
-      // Example 1      
-      
-      
-      $('.example_1').click(function (e) {
+
+    $('.yellowbox').yellowBox();
+
+    // Example 1      
+
+    $('.example_1').click(function (e) {
         e.preventDefault();
         $('#yellowbox-1').data('api').blink(3);
-      });
-      
-      $('#yellowbox-1').data('api').blink();
-      
-      // Example 2
-      
-      $('.example_2').click(function (e) {
-          e.preventDefault();
-          $('#yellowbox-2').data('api').alert({
-              title: 'Hey There',
-              body: 'This message will close in 5 seconds'
-          }).closeIn(5000); // Close in 5 seconds
-      });
+    });
 
-      // Example 3      
-      
-      $('.example_3').click(function (e) {
-          e.preventDefault();
-          $('#yellowbox-3').data('api').confirm({
+    $('#yellowbox-1').data('api').blink();
+
+    // Example 2
+
+    $('.example_2').click(function (e) {
+        e.preventDefault();
+        $('#yellowbox-2').data('api').alert({
+            title: 'Hey There',
+            body: 'This message will close in 5 seconds'
+        }).closeIn(5000); // Close in 5 seconds
+    });
+
+    // Example 3      
+
+    $('.example_3').click(function (e) {
+        e.preventDefault();
+        $('#yellowbox-3').data('api').confirm({
             title: '¡Question!',
             body: 'Is this process may take a few minutes, is sure to continue?',
-            buttons:{
-              'Aceptar':{
-                onClick: function(){
-                  alert("Ok");
+            buttons: {
+                'Aceptar': {
+                    onClick: function () {
+                        alert("Ok");
+                    }
+                },
+                'Cancelar': {
+                    onClick: function () {
+                        this.close();
+                    }
                 }
-              },
-              'Cancelar':{
-                onClick: function(){
-                  this.close();
-                }
-              }
             }
-          }).blink(2);
-      });
-      
-      // Example 4      
-      
-      $('.example_4').bind('click', function (e) {
-          e.preventDefault();        
-          $('#yellowbox-4').data('api').shake(function(){
-              alert('Animation finished');
-          });
-      });      
-      
-      
+        }).blink(2);
+    });
 
-  });
+    // Example 4      
+
+    $('.example_4').bind('click', function (e) {
+        e.preventDefault();
+        $('#yellowbox-4').data('api').shake(function () {
+            alert('Animation finished');
+        });
+    });
+
+});
   </script>
 </head>
 <body class="lyt_common loged">
