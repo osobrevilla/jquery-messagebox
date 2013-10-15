@@ -64,7 +64,7 @@
         // Set Timer closeIn 
         this.timerIn = null;
         // Set custom settings
-        this.setup();
+        this._setup();
     };
 
 
@@ -74,7 +74,7 @@
          * Setup
          */
 
-        setup: function () {
+        _setup: function () {
             var that = this,
                 close;
             if (that.options.closer) {
@@ -89,18 +89,27 @@
             }
         },
 
+
+        /**
+         * Set new content to the Yellowbox
+         * @param title {String/HtmlString}
+         * @param body {String/HtmlString}
+         */
+        _setContent: function (title, body) {
+            this.dom.title.html(title || '');
+            this.dom.body.html(body || '');
+            return this;
+        },
+
+
         /**
          * Default effect
          * @param options {object}
          * @param speed {Integer} speed of animation in milliseconds.
          */
-        fx: function (options, speed) {
+        _fx: function (options, speed) {
             var that = this;
             options = options || {};
-            //TO-DO 
-            // make the effects css3 with javascript to IE6-7-8 versions, only fadeIn<->Out
-            //.animate($.extend(settings.blink, options), speed || 800)
-            //.animate({ backgroundColor: this.initialColor }, speed || 500);
             clearTimeout(that.timer);
             that.el.addClass('yellowbox-emphasis');
             that.timer = setTimeout(function () {
@@ -112,7 +121,7 @@
          * Generate buttons
          * @param buttons {object}
          */
-        buildBtns: function (buttons) {
+        _buildBtns: function (buttons) {
             var that = this,
                 listButtons = [];
             $.each(buttons || [], function (label) {
@@ -141,10 +150,10 @@
                 counter = 0,
                 nrepeat = repeats || 1,
                 timer;
-            that.fx(options, speed);
+            that._fx(options, speed);
             timer = setInterval(function () {
                 if (counter < nrepeat - 1) {
-                    that.fx(options, speed);
+                    that._fx(options, speed);
                     counter += 1;
                 } else {
                     clearInterval(timer);
@@ -218,24 +227,13 @@
          * Asks a question in Yellowbox
          * @param options {options}
          */
-        setQuestion: function (options) {
+        question: function (options) {
             var that = this;
             options = options || {};
-            that.setContent(options.title, options.body);
-            that.boxButtons.show().empty().append(that.buildBtns(options.buttons));
+            that._setContent(options.title, options.body);
+            that.boxButtons.show().empty().append(that._buildBtns(options.buttons));
             that.el.append(that.boxButtons);
             return that;
-        },
-
-        /**
-         * Set new content to the Yellowbox
-         * @param title {String/HtmlString}
-         * @param body {String/HtmlString}
-         */
-        setContent: function (title, body) {
-            this.dom.title.html(title || '');
-            this.dom.body.html(body || '');
-            return this;
         },
 
         /**
@@ -247,7 +245,7 @@
             options = options || {};
             that.show(null, 'slideDown', 'fast').blink();
             that.boxButtons.hide();
-            that.setContent(options.title, options.body);
+            that._setContent(options.title, options.body);
             if (options.seconds) {
                 setTimeout(function () {
                     that.close();
