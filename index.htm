@@ -1,0 +1,208 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>jQuery YellowBox (Beta) by osobrevilla</title>
+  <link href="css/yellowbox.css" rel="stylesheet"  charset="utf-8" media="screen" type="text/css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <script src="js/jquery-1.8.2.min.js" type="text/javascript"></script>
+  <script src="js/jquery.yellowbox.js" type="text/javascript"></script>
+  <script type="text/javascript">
+  $(function () {
+
+    $('.yellowbox').yellowBox();
+
+    // Example 1      
+
+    $('.example_1').on('click', function (e) {
+        e.preventDefault();
+        $('#yellowbox-1').data('api').blink(3);
+    });
+
+    $('#yellowbox-1').data('api').blink();
+
+    // Example 2
+
+    $('.example_2').on('click', function (e) {
+        e.preventDefault();
+        $('#yellowbox-2').data('api').setMessage({
+            title: 'Hey There',
+            body: 'This message will close in 5 seconds'
+        }).closeIn(5000); // Close in 5 seconds
+    });
+
+    // Example 3      
+
+    $('.example_3').on('click', function (e) {
+        e.preventDefault();
+        $('#yellowbox-3').data('api').question({
+            title: '¡Question!',
+            body: 'Is this process may take a few minutes, is sure to continue?',
+            buttons: {
+                'Aceptar': {
+                    onClick: function () {
+                        alert("Ok");
+                    }
+                },
+                'Cancelar': {
+                    onClick: function () {
+                        this.close();
+                    }
+                }
+            }
+        }).blink(2);
+    });
+
+    // Example 4      
+
+    $('.example_4').on('click', function (e) {
+        e.preventDefault();
+        $('#yellowbox-4').data('api').shake(function () {
+            alert('Animation finished');
+        });
+    });
+
+});
+  </script>
+</head>
+<body class="lyt_common loged">
+  <div class="bg_top">
+    <div id="wrapper">
+      <header>
+        <h1>jQuery YellowBox</h1>
+        <p>jQuery plugin for show yellowbox messages and questions.</p>
+
+        <ul>
+          <li><a href="https://github.com/osobrevilla/jquery-yellowbox/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/osobrevilla/jquery-yellowbox/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/osobrevilla/jquery-yellowbox">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <hr/>
+      <div id="content" class="fix_flex">
+        <div class="content-inner">
+          <div id="content_main" class="col2 column">
+            <div class="content_main_inner">
+              <!-- info main -->
+              <div class="box_example">
+                
+                <h2>Basic HTML structure</h2>
+<pre>
+  ....
+  
+  &lt;div class=&quot;yellowbox&quot;&gt; 
+     &lt;div class=&quot;yellowbox-title&quot;&gt;Title Text&lt;/div&gt;
+     &lt;div class=&quot;yellowbox-body&quot;&gt;Any text or Messange here.&lt;/div&gt;
+  &lt;/div&gt;  
+  ....
+  
+  &lt;script type=&quot;text/javascript&quot; charset=&quot;utf-8&quot;&gt;
+    $(function(){
+      $('.yellowbox').yellowBox();
+    });
+  &lt;/script&gt;
+</pre>                  
+                
+                
+                <br /> <br /> 
+                <h2>Example I - Run on DOM ready.</h2>
+                 <div id="yellowbox-1" class="yellowbox"> 
+                    <div class="yellowbox-title">Atencion</div>
+                    <div class="yellowbox-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla egestas elit sed metus euismod sollicitudin.</div>
+                  </div>
+                  Hey <a href="#" class="example_1">Run blink again! (3 times)</a>
+                <p><strong>Code:</strong></p>
+
+<pre> 
+$(function() {
+  $('.yellowbox').yellowBox(); // previously initialized                
+  $('#yellowbox-1').data('api').blink(3);
+});
+</pre>
+               
+
+                <br /><br />
+
+                <h2>Example 2 - Trigger programatic alert.</h2>
+                
+                <div id="yellowbox-2" class="yellowbox"> 
+                  <div class="yellowbox-title"></div>
+                  <div class="yellowbox-body"> 
+                    A message will appear here programatically! <a href="#" class="example_2" >Click Here!!</a>
+                  </div>
+                </div>                
+                <p><strong>Code:</strong></p>
+<pre>
+  $('#yellowbox-2').data('api').setMessage({ 
+    title: 'Hey There',
+    body:  'This message will close in 5 seconds'
+  }).closeIn(5000);
+</pre>
+
+                
+                
+                
+                  <br /><br />
+                 <h2>Example 3 - Trigger programatic question.</h2>
+                  <div id="yellowbox-3" class="yellowbox"> 
+                     <div class="yellowbox-title">Hello Word!</div>
+                     <div class="yellowbox-body"> 
+                       What if it became a question with buttons and everything.
+                     </div>
+                   </div>
+                   <p>Create a question <a href="#" class="example_3" >Click Here!!</a></p>
+                  <p><strong>Code:</strong></p>
+<pre>
+  $('#yellowbox-3').data('api').question({
+    title: '¡Question!',
+    body: 'Is this process may take a few minutes, is sure to continue?',
+    buttons:{
+      'Aceptar':{
+        onClick: function(){
+          alert("Ok");
+        }
+      },
+      'Cancelar':{
+        onClick: function(){
+          this.close();
+        }
+      }
+    }
+  }).blink(2);
+</pre>
+ <br /><br />
+ <h2>Example 4 - Shake Animation.</h2>
+  <div id="yellowbox-4" class="yellowbox"> 
+     <div class="yellowbox-title">ShakeMe!!</div>
+     <div class="yellowbox-body"> 
+       this box for your eyes dance. Shake shake!!
+     </div>
+   </div>
+   <p>Hey <a href="#" class="example_4" >Shake!</a></p>
+  <p><strong>Code:</strong></p>
+  <pre>
+$('.example_4').bind('click', function (e) {
+    e.preventDefault();        
+    $('#yellowbox-4').data('api').shake(function(){
+        alert('Animation finished');
+    });
+});
+  </pre>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
+      <br />
+      <br />
+      <hr>
+      
+      <div id="footer">
+        <p class="right">  © Oscar Sobrevilla <a href="mailto:oscar.sobrevilla@gmail.com">oscar.sobrevilla@gmail.com</a> </p>
+      </div>
+    </div>
+  </body>
+  </html>
