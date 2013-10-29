@@ -44,8 +44,8 @@
             autoFx: false,
             strClose: 'Close'
         };
-        for ( i in options) 
-          this.options[i] = options[i];
+        for (i in options)
+            this.options[i] = options[i];
         // Set DOM box element
         this.el = $(elem);
         // Set closer
@@ -66,7 +66,6 @@
         // Set custom settings
         this._setup();
     };
-
 
     $.extend(YellowBox.prototype, {
 
@@ -89,7 +88,6 @@
             }
         },
 
-
         /**
          * Set new content to the Yellowbox
          * @param title {String/HtmlString}
@@ -100,7 +98,6 @@
             this.dom.body.html(body || '');
             return this;
         },
-
 
         /**
          * Default effect
