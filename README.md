@@ -1,6 +1,6 @@
-jQuery-Yellowbox
+jQuery-MessageBox
 ================
 
-jQuery plugin for show yellowbox questions and alert messages.
+jQuery plugin to show flashy messages..
 
 [see the demo](http://osobrevilla.github.io/jquery-yellowbox/)
