@@ -121,6 +121,7 @@ MessageBox = (function($) {
             return that;
         },
 
+
         /**
          * Displays a message.
          * @param title {String}
@@ -144,7 +145,6 @@ MessageBox = (function($) {
          * @param callback {function}
          * @exposed
          */
-
         open: function(callback) {
             this._show(callback);
             return this;
@@ -199,7 +199,12 @@ MessageBox = (function($) {
             return this;
         },
 
-        destroy: function(){
+
+        /**
+         * Destroy instance
+         * @exposed
+         */
+        destroy: function() {
             this.el.remove();
             this.el = null;
             this.dom = null;
