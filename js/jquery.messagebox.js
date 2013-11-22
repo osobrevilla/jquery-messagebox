@@ -1,6 +1,5 @@
 MessageBox = (function($) {
 
-
     var dummyStyle = document.createElement('div').style,
         vendor = (function() {
             var vendors = 't,webkitT,MozT,msT,OT'.split(','),
