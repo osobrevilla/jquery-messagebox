@@ -1,4 +1,5 @@
 $(function() {
+    
     var box;
 
     function next() {
