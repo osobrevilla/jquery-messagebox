@@ -55,7 +55,7 @@ $(function() {
                     'Antention!',
                     'Do you want to save the changes before quit?', {
                         'Accept': function() {
-                            box.message(
+                            this.message(
                                 'Success',
                                 'the changes were saved successfully.'
                             );
