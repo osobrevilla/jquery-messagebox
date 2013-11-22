@@ -45,7 +45,7 @@ $(function() {
                 box.message(
                     'The new message title',
                     'And this is the new message text.'
-                );
+                ).blink(2);
                 next.call(this); // ignore this line
                 break;
 
